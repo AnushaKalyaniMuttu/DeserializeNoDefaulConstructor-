@@ -1,0 +1,13 @@
+When you try to deserialize an object using a library like Jackson in Java, and the class being deserialized does not have a default (no-args) constructor, you may encounter an exception.
+
+Most serialization/deserialization libraries rely on the existence of a default constructor to instantiate objects during the deserialization process. If a class lacks a default constructor, the library won't be able to create an instance of that class, leading to an exception like JsonMappingException in Jackson.
+
+To resolve this issue, you have a few options:
+
+Add a default constructor: You can explicitly define a default constructor in your class.
+
+Use annotations or custom deserialization logic: Some libraries, like Jackson, provide annotations (@JsonCreator, @JsonProperty, etc.) or custom deserialization logic to handle cases where a default constructor is not available. With Jackson, for example, you can annotate a different constructor with @JsonCreator and specify how to deserialize the object using constructor arguments or methods.
+
+Custom deserialization: Implement custom deserialization logic by implementing the JsonDeserializer interface in Jackson or equivalent interfaces in other libraries. This allows you to control the deserialization process manually, including how to instantiate objects without relying on a default constructor.
+
+Overall, handling deserialization without a default constructor requires a bit more effort and attention to detail to ensure proper object instantiation and data binding.
